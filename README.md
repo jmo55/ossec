@@ -51,6 +51,7 @@ copy dir to desired path
 
 run docker-compose.yml file within ossec_project dir.
 
+change port number in yml file for apache2 container if needed. I had something else exposed to port 80 and used port 8080.
 
 # Reference LINKS!
 
