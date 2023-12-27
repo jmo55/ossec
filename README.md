@@ -1,7 +1,8 @@
 # ossec
-ossec-setup-guide
 
-# This file contains my compiled notes to install and apply the initial configurations for OSSEC.
+OSSEC-SETUP-GUIDE
+
+# This file contains my compiled notes from multiple resources to install and apply the initial configurations for OSSEC.
 
 :: OSSEC v3.7.0
 :: Copyright (C) 2019 Trend Micro Inc.
@@ -29,13 +30,19 @@ ossec-setup-guide
 :: - make, gcc
 :: - libsystemd-dev
 
-:: On a Ubuntu/Debian system, these can be installed with:
+:: On a Ubuntu/Debian system,
 
-# :: Prerequesite Commands; after apt-get update && apt get upgrade -y & switch to root user
+# Preferably be in root until completion, Update & Upgrade Distro
+
+su
+
+apt update && apt upgrade -y
+
+# :: Prerequisite Commands; 
 
 apt install libz-dev libssl-dev libpcre2-dev build-essential libsystemd-dev
 
-# :: Prerequesite install web-server && start/enable service
+# :: web-server service install & start/enable service
 
 apt install apache2 php
 
@@ -43,8 +50,9 @@ systemctl start apache2
 
 systemctl enable apache2
 
-# :: INSTALL OSSEC, switch to root user
-# :: RELEASE NOTES: https://github.com/ossec/ossec-hids/releases/tag/3.7.0
+# :: INSTALL OSSEC
+
+:: RELEASE NOTES: https://github.com/ossec/ossec-hids/releases/tag/3.7.0
 
 wget https://github.com/ossec/ossec-hids/archive/3.7.0.tar.gz
 
@@ -160,8 +168,7 @@ systemctl restart apache2
 
 # :: If you followed Alternative 2 then skip "Additional Web UI conf...."
 
-
-# :: Additional Web UI configurations to make sure everything works properly.
+:: Additional Web UI configurations to make sure everything works properly.
 
 chmod -R 755 /var/www/html/ossec/
 
@@ -169,9 +176,9 @@ chown -R www-data:www-data /var/www/html/ossec/
 
 systemctl restart apache2
 
-# :: CREATE AN AGENT; follow link example (https://ossec-docs.readthedocs.io/en/latest/docs/manual/installation/installation-windows.html#step-4-the-windows-side)
+# :: CREATE AN AGENT
 
-# :: OPEN the AGENT Manager Menu
+:: OPEN the AGENT Manager Menu
 
 /var/ossec/bin/manage_agents
 
@@ -211,7 +218,7 @@ LINK: (https://updates.atomicorp.com/channels/atomic/windows/ossec-agent-win32-3
 
 # :: FINALLY NAVIGATE TO WEB UI LINK
 
-http:hostip/ossec
+http:[hostip]/ossec
 
 # :: REFERENCE LINKS!
 
@@ -220,6 +227,8 @@ https://www.rapid7.com/blog/post/2017/06/30/how-to-install-and-configure-ossec-o
 https://www.youtube.com/watch?v=bcbJWWci1M4
 
 https://ossec-docs.readthedocs.io/en/latest/docs/manual/installation/installation-windows.html#step-4-the-windows-side
+
+https://www.ossec.net/docs/docs/manual/agent/agent-management.html
 
 https://github.com/ossec
 
