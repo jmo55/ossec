@@ -1,0 +1,2 @@
+# ossec
+ossec-setup-guide
