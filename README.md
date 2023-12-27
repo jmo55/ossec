@@ -1,6 +1,4 @@
-# ossec
-
-OSSEC-SETUP-GUIDE
+# OSSEC-SETUP-GUIDE
 
 # This file contains my compiled notes from multiple resources to install and apply the initial configurations for OSSEC.
 
@@ -8,17 +6,17 @@ Before running the script, make sure your system has the necessary libraries and
 
 For Ubuntu/Debian system.
 
-# Preferably be in root until completion.
+Preferably be in root until completion.
 
 # For baremetal or vm installation steps review "installation_steps..." file.
 
 RELEASE NOTES: https://github.com/ossec/ossec-hids/releases/tag/3.7.0
 
-# To install web ui follow steps in "installation_steps..." file or follow the link below for another example for rapid7. 
+To install web ui follow steps in "installation_steps..." file or follow the link below for another example for rapid7. 
 
 https://www.rapid7.com/blog/post/2017/06/30/how-to-install-and-configure-ossec-on-ubuntu-linux/
 
-# Agent Management
+Agent Management
 
 Open The Agent Manager Menu
 
@@ -37,10 +35,22 @@ Open The Agent Manager Menu
 Choose your action: A,E,L,R or Q:
 
 
-# WINDOWS AGENT
+WINDOWS AGENT
 
 Next up, download the executable named Agent Windows from https://ossec.github.io/downloads.html. Run through the install wizard with all defaults. It should launch the Ossec Agent Manager when it’s done. 
 LINK: (https://updates.atomicorp.com/channels/atomic/windows/ossec-agent-win32-3.7.0-24343.exe)
+
+
+# For docker compose container example use folder:"ossec_container_project.tar.gz"
+
+Download folder and extract .tar
+
+tar -xvzf ossec_container_project.tar.gz
+
+copy dir to desired path
+
+run docker-compose.yml file within ossec_project dir.
+
 
 # Reference LINKS!
 
@@ -57,14 +67,3 @@ https://github.com/ossec
 https://github.com/ossec/ossec-hids/blob/master/INSTALL
 
 https://github.com/ossec/ossec-wui/blob/master/README
-
-
-# I am also working on a docker compose container stack. Currently, I've uploaded an example for docker --build. Folder:"ossec_container_project.tar.gz"
-
-Download folder and extract .tar 
-
-tar -xvzf ossec_container_project.tar.gz
-
-copy dir to desired path
-
-run docker-compose.yml file within ossec_project dir. 
