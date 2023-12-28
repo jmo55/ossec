@@ -2,6 +2,7 @@
 
 #Preferably, be in root until completion. 
 #Note: Web-UI breaks with php8.x 
+#Distro used Ubuntu 20.04
 
 su
 
@@ -13,8 +14,7 @@ apt update && apt upgrade -y
 
 #Prerequisite Commands;
 	
-apt install libz-dev libssl-dev libpcre2-dev build-essential libsystemd-dev git unzip apache2 php7.4 libapache2-mod-php7.4 postfixgcc make apache2 libapache2-mod-php7.4 php7.4 php7.4-cli php7.4-common apache2-utils unzip wget sendmail inotify-tools -y 
-apt install zlib1g-dev libpcre2-dev libevent-dev libssl-dev libsqlite3-dev -y
+apt install zlib1g-dev libssl-dev libpcre2-dev build-essential libsystemd-dev git unzip postfix gcc make apache2 libapache2-mod-php7.4 php7.4 php7.4-cli php7.4-common apache2-utils unzip wget inotify-tools -y
 
 
 #start/enable web service
@@ -33,7 +33,10 @@ cd ossec-hids-3.7.0
 
 ./install.sh
 
-:: answer the install questions - type LOCAL & for email use root@localhost or your email smtp settings
+#Answer the installation questions - type LOCAL & for email use root@localhost or your email smtp settings
 
 #Start ossec service
+
 /var/ossec/bin/ossec-control start
+
+#Review "Additional_configurations" to continue with basic configuration steps after install.
