@@ -1,0 +1,56 @@
+#Additional basic configuration steps for OSSEC
+
+#Configure OSSEC
+The default configuration of OSSEC works fine. The OSSEC mail configuration file is located inside /var/ossec/etc/ directory.
+
+#Now, open the OSSEC main configuration file ossec.conf using the following command:
+
+nano /var/ossec/etc/ossec.conf
+
+The first configuration options is the E-mail configurations which you specified during installation. You can change this setting at any time:
+
+<global> 
+    <email_notification>yes</email_notification> 
+    <email_to>root@localhost</email_to> 
+    <smtp_server>127.0.0.1</smtp_server> 
+    <email_from>ossecm@localhost</email_from> 
+</global>
+
+By default, OSSEC does not alert when a new file is added to the server. You can change that by adding a new line just under the section as shown below:
+
+<syscheck> 
+    <!-- Frequency that syscheck is executed - default to every 22 hours --> 
+    <frequency>79200</frequency> 
+    <alert_new_files>yes</alert_new_files>
+
+OSSEC does not send real-time alerts by default. You will also need to change is in the list to directories that OSSEC should check. By default, the directories are shown below:
+
+<!-- Directories to check (perform all possible verifications) --> 
+<directories check_all="yes">/etc,/usr/bin,/usr/sbin</directories> 
+<directories check_all="yes">/bin,/sbin</directories>
+You will need to modify the above two lines to make OSSEC report changes in real-time. Replace the both lines with the following:
+
+<directories report_changes="yes" realtime="yes" check_all="yes">/etc,/usr/bin,/usr/sbin</directories> 
+<directories report_changes="yes" realtime="yes" check_all="yes">/var/www,/bin,/sbin</directories>
+Save and close the file when you are finished.
+
+Next, you will need to modify the rules file local_rules.xml located inside /var/ossec/rules directory. This file contains rules for new file added to the system.
+
+nano /var/ossec/rules/local_rules.xml
+
+Add the following lines between ... sections:
+
+<rule id="554" level="7" overwrite="yes"> 
+    <category>ossec</category> 
+    <decoded_as>syscheck_new_entry</decoded_as> 
+    <description>File added to the system.</description> 
+    <group>syscheck,</group> 
+</rule>
+
+Save and close the file when you are finished. Then restart OSSEC with the following command:
+
+/var/ossec/bin/ossec-control restart
+
+If all is well OSSEC restarts with no errors.
+
+#NOTES: These are recommended configurations from Rapid7 guide.
