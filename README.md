@@ -1,57 +1,61 @@
-# OSSEC-SETUP-GUIDE
+# OSSEC-SETUP-GUIDE Warning: web-ui does not work with PHP 8.x 
 
-# This file contains my compiled notes from multiple resources to install and apply the initial configurations for OSSEC.
+# Getting Started
 
-Before running the script, make sure your system has the necessary libraries and tools installed:
-
+(I compiled this setup as a quick projec, using multiple guides as resource.This is steps are or version 3.7.0.)
 For Ubuntu/Debian system.
-
-Preferably be in root until completion.
-
-# For baremetal or vm installation steps review "installation_steps..." file.
-
 RELEASE NOTES: https://github.com/ossec/ossec-hids/releases/tag/3.7.0
+ 
 
-To install web ui follow steps in "installation_steps..." file or follow the link below for another example for rapid7. 
+For baremetal or vm installation steps review "installation_steps". This will help installand conduct initial configurations for OSSEC.
+
+To install web ui follow steps in "web-ui-installation_steps" or follow the link below for another example for rapid7. 
 
 https://www.rapid7.com/blog/post/2017/06/30/how-to-install-and-configure-ossec-on-ubuntu-linux/
 
-Agent Management
+To manage Agents run: 
 
-Open The Agent Manager Menu
+:::::::::::::::::::::::::::::::::::::::::::::::
+:                                             :
+:       /var/ossec/bin/manage_agents          :
+:                                             :
+:::::::::::::::::::::::::::::::::::::::::::::::
 
-/var/ossec/bin/manage_agents
-
-****************************************
-* OSSEC HIDS v2.5-SNP-100809 Agent manager.*
-* The following options are available:*
-***************************************
-
-(A)dd an agent (A).
-(E)xtract key for an agent (E).
-(L)ist already added agents (L).
-(R)emove an agent (R).
-(Q)uit.
-Choose your action: A,E,L,R or Q:
-
-
-WINDOWS AGENT
+For Windows Agent Install:
 
 Next up, download the executable named Agent Windows from https://ossec.github.io/downloads.html. Run through the install wizard with all defaults. It should launch the Ossec Agent Manager when it’s done. 
 LINK: (https://updates.atomicorp.com/channels/atomic/windows/ossec-agent-win32-3.7.0-24343.exe)
 
 
-# For docker compose container example use folder:"ossec_container_project.tar.gz"
+# Docker Compose 
 
-Download folder and extract .tar
+I compiled a docker-compose.yml file to containerize the configurations. This is not an image, I used "ubuntu:apache2" & "atomicorp:ossec-docker" image.
 
-tar -xvzf ossec_container_project.tar.gz
+Directory Structure:
 
-copy dir to desired path
+/your_project
+├── docker-compose.yml
+├── services
+│   ├── apache2
+│   │   ├── Dockerfile
+│   │   └── httpd.conf
+│   └── ossec-server
+│       ├── Dockerfile
+│       └── ossec.conf
+└── agents
+    ├── agent1
+    │   └── ossec.conf
+    └── agent2
+        └── ossec.conf
 
-run docker-compose.yml file within ossec_project dir.
+Dir & files compressed "ossec_project_compose.tar.gz"
 
-change port number in yml file for apache2 container if needed. I had something else exposed to port 80 and used port 8080.
+Change the port number in yml file for apache2 container if needed. I had something else exposed to port 80 and used port 8080.
+
+To run docker-compose.yml file within ossec_project dir. Command: docker compose up -d --build
+
+
+
 
 # Reference LINKS!
 

@@ -1,39 +1,10 @@
 #This file contains my compiled notes from multiple resources to install and apply the initial configurations for OSSEC.
 
-#Preferably be in root until completion, Update & Upgrade Distro
+#Preferably be in root until completion. 
+#Note: Web-UI breaks with php8.x
 
-su
-
-apt update && apt upgrade -y
-
-#Prerequisite Commands;
-
-apt install libz-dev libssl-dev libpcre2-dev build-essential libsystemd-dev git unzip apache2 php libapache2-mod-php postfix
-
-#start/enable web service
-
-systemctl start apache2
-
-systemctl enable apache2
-
-#INSTALL OSSEC
-
-wget https://github.com/ossec/ossec-hids/archive/3.7.0.tar.gz
-
-tar -xvzf 3.7.0.tar.gz
-
-cd ossec-hids-3.7.0
-
-./install.sh
-
-:: answer the install questions - do a LOCAL & for email root@localhost
-
-#Start ossec service
-
-/var/ossec/bin/ossec-control start
 
 #INSTALL OSSEC WEB UI
-
 cd /tmp
 
 git clone https://github.com/ossec/ossec-wui.git
@@ -49,15 +20,11 @@ chown -R www-data:www-data /var/www/html/ossec-wui/
 systemctl restart apache2
 
 #CREATE AN AGENT | ADDING AGENT | EXTRACTING Key
-
 /var/ossec/bin/manage_agents
 
 #FOR WINDOWS AGENT
-
 Next up, download the executable named Agent Windows from https://ossec.github.io/downloads.html. Run through the install wizard with all defaults. It should launch the Ossec Agent Manager when it’s done. LINK: (https://updates.atomicorp.com/channels/atomic/windows/ossec-agent-win32-3.7.0-24343.exe)
 
 #WEB UI LINK
-
 http://[hostip]/ossec-webui
-
 
