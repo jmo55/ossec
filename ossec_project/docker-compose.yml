@@ -1,0 +1,46 @@
+version: '3'
+
+ 
+
+services:
+
+  apache2:
+
+    build:
+
+      context: ./services/apache2
+
+    restart: unless-stopped
+
+    ports:
+
+      - "8080:80"
+
+    depends_on:
+
+      - ossec-server
+
+ 
+
+  ossec-server:
+
+    build:
+
+      context: ./services/ossec-server
+
+    restart: unless-stopped
+
+    ports:
+
+      - "514:514/tcp"
+
+      - "1514:1514/udp"
+
+      - "1515:1515/tcp"
+
+      - "55000:55000/tcp"
+    volumes:
+
+      - ./agents/agent1:/var/ossec/agent1
+
+      - ./agents/agent2:/var/ossec/agent2
