@@ -2,8 +2,7 @@
 
 # Getting Started
 
-(I compiled this setup as a quick projec, using multiple guides as resource.This is steps are or version 3.7.0.)
-For Ubuntu/Debian system.
+(I compiled this setup as a quick project, using multiple guides as resources.This steps are for version 3.7.0.) & Ubuntu/Debian system.
 RELEASE NOTES: https://github.com/ossec/ossec-hids/releases/tag/3.7.0
  
 
