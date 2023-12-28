@@ -1,4 +1,4 @@
-# OSSEC-SETUP-GUIDE Warning: web-ui does not work with PHP 8.x 
+# OSSEC-SETUP-GUIDE Warning: web-ui did not work for me with PHP 8.x 
 
 # Getting Started
 
@@ -6,9 +6,10 @@
 RELEASE NOTES: https://github.com/ossec/ossec-hids/releases/tag/3.7.0
  
 
-For baremetal or vm installation steps review "installation_steps". This will help installand conduct initial configurations for OSSEC.
+For baremetal or vm installation steps review "installation_steps". For initial configurations steps after installing OSSEC follow "Additiona_coonfigurations".
 
-To install web ui follow steps in "web-ui-installation_steps" or follow the link below for another example for rapid7. 
+To install web-ui follow the steps in "web-ui-installation_steps" or follow the link below for another example for rapid7.
+(NOTE: In my docker compose file the container automaticall installs the latest version of PHP8.*. This breaks web-ui & I haven't found the fix.) 
 
 https://www.rapid7.com/blog/post/2017/06/30/how-to-install-and-configure-ossec-on-ubuntu-linux/
 
@@ -22,7 +23,7 @@ LINK: (https://updates.atomicorp.com/channels/atomic/windows/ossec-agent-win32-3
 
 # Docker Compose 
 
-I compiled a docker-compose.yml file to containerize the configurations. This is not an image, I used "ubuntu:apache2" & "atomicorp:ossec-docker" image.
+I compiled a docker-compose.yml file to containerize the configurations. This is not an image, I used the "ubuntu:ubuntu" & "atomicorp:ossec-docker" images.
 
 Directory Structure:
 
@@ -40,7 +41,14 @@ Change the port number in yml file for apache2 container if needed. I had someth
 
 To run docker-compose.yml file within ossec_project dir. Command: docker compose up -d --build
 
+Once the containers are created, connect to the containers using command: docker exec -it <containername> /bin/bash
 
+Inside the containers run:
+
+For apache2 container, CMD: sh /var/www/html/ossec-webui/setup.sh & go through the configuration (Review web-ui-installation_steps to complete this.)
+For ossec-server, CMD: /var/ossec/bin/ossec-control start (Review installation_steps to complete this.)
+
+These should be running, but if not then that will start the services.
 
 
 # Reference LINKS!
