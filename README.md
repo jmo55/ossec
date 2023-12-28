@@ -13,13 +13,7 @@ To install web ui follow steps in "web-ui-installation_steps" or follow the link
 
 https://www.rapid7.com/blog/post/2017/06/30/how-to-install-and-configure-ossec-on-ubuntu-linux/
 
-To manage Agents run: 
-
-:::::::::::::::::::::::::::::::::::::::::::::::
-:                                             :
-:       /var/ossec/bin/manage_agents          :
-:                                             :
-:::::::::::::::::::::::::::::::::::::::::::::::
+To manage Agents run: /var/ossec/bin/manage_agents
 
 For Windows Agent Install:
 
@@ -34,19 +28,19 @@ I compiled a docker-compose.yml file to containerize the configurations. This is
 Directory Structure:
 
 /your_project
-├── docker-compose.yml
-├── services
-│   ├── apache2
-│   │   ├── Dockerfile
-│   │   └── httpd.conf
-│   └── ossec-server
-│       ├── Dockerfile
-│       └── ossec.conf
-└── agents
-    ├── agent1
-    │   └── ossec.conf
-    └── agent2
-        └── ossec.conf
+ - docker-compose.yml
+/ services
+  / apache2
+    - Dockerfile
+    -httpd.conf
+  / ossec-server
+    -Dockerfile
+    -ossec.conf
+  / agents
+    / agent1
+       -ossec.conf
+    / agent2
+       -ossec.conf
 
 Dir & files compressed "ossec_project_compose.tar.gz"
 
