@@ -27,20 +27,13 @@ I compiled a docker-compose.yml file to containerize the configurations. This is
 
 Directory Structure:
 
-/your_project
- - docker-compose.yml
-/ services
-  / apache2
-    - Dockerfile
-    -httpd.conf
-  / ossec-server
-    -Dockerfile
-    -ossec.conf
-  / agents
-    / agent1
-       -ossec.conf
-    / agent2
-       -ossec.conf
+/your_project (main dir)|docker-compose.yml
+/services (sub dir)
+/apache2 (services sub dir) | Dockerfile | httpd.conf
+/ossec-server (services sub dir) | Dockerfile | ossec.conf
+/agents (services sub dir)
+/agent1 (agents sub dir) | ossec.conf
+/agent2 (agents sub dir) | ossec.conf
 
 Dir & files compressed "ossec_project_compose.tar.gz"
 
