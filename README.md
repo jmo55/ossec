@@ -6,10 +6,10 @@
 RELEASE NOTES: https://github.com/ossec/ossec-hids/releases/tag/3.7.0
  
 
-For baremetal or vm installation steps review "installation_steps". For initial configurations steps after installing OSSEC follow "Additiona_coonfigurations".
+For baremetal or vm installation steps review "installation_steps". For initial configurations steps after installing OSSEC follow "Additional_configurations".
 
 To install web-ui follow the steps in "web-ui-installation_steps" or follow the link below for another example for rapid7.
-(NOTE: In my docker compose file the container automaticall installs the latest version of PHP8.*. This breaks web-ui & I haven't found the fix.) 
+(NOTE: In my docker compose file the container automatically installs the latest version of PHP8.*. This breaks web-ui & I haven't found the fix.) 
 
 https://www.rapid7.com/blog/post/2017/06/30/how-to-install-and-configure-ossec-on-ubuntu-linux/
 
