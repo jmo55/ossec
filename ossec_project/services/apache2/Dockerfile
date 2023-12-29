@@ -1,12 +1,28 @@
-FROM ubuntu/apache2
+# Start from the ubuntu:latest image
+
+FROM ubuntu:latest
 
  
 
-# Install required packages
+# Set environment variables to avoid interactive prompts
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+ENV TZ=UTC
+
+ 
+
+# Pin the PHP version to avoid automatic upgrades
+
+RUN echo "php7.4 hold" | dpkg --set-selections
+
+ 
+
+# Install necessary packages, including Apache and PHP 7.4
 
 RUN apt-get update && \
 
-    apt-get install -y git unzip php libapache2-mod-php && \
+    apt-get install -y apache2 php7.4 libapache2-mod-php7.4 git && \
 
     rm -rf /var/lib/apt/lists/*
 
@@ -42,7 +58,7 @@ COPY httpd.conf /etc/apache2/sites-available/000-default.conf
 
  
 
-# Expose port
+# Expose port 80
 
 EXPOSE 80
 
