@@ -46,7 +46,7 @@ Inside the containers run:
 For "apache2" container, CMD: sh /var/www/html/ossec-webui/setup.sh & go through the configuration (Review web-ui-installation_steps to complete this.)
 For "ossec-server", CMD: /var/ossec/bin/ossec-control start (Review installation_steps to complete this.)
 
-These should be running, but if not then that will start the services.
+These should be running. But, if the service is not running then those commands shouldl start the service in each container.
 
 
 # Reference LINKS!
