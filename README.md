@@ -35,18 +35,16 @@ Directory Structure:
 /agent1 (agents sub dir) | ossec.conf
 /agent2 (agents sub dir) | ossec.conf
 
-Dir & files compressed "ossec_project_compose.tar.gz"
-
 Change the port number in yml file for apache2 container if needed. I had something else exposed to port 80 and used port 8080.
 
-To run docker-compose.yml file within ossec_project dir. Command: docker compose up -d --build
+To run the docker-compose.yml file within ossec_project /dir use command: docker compose up -d --build
 
-Once the containers are created, connect to the containers using command: docker exec -it <containername> /bin/bash
+Once the containers are created and running, connect to the containers using command: docker exec -it "containername" /bin/bash
 
 Inside the containers run:
 
-For apache2 container, CMD: sh /var/www/html/ossec-webui/setup.sh & go through the configuration (Review web-ui-installation_steps to complete this.)
-For ossec-server, CMD: /var/ossec/bin/ossec-control start (Review installation_steps to complete this.)
+For "apache2" container, CMD: sh /var/www/html/ossec-webui/setup.sh & go through the configuration (Review web-ui-installation_steps to complete this.)
+For "ossec-server", CMD: /var/ossec/bin/ossec-control start (Review installation_steps to complete this.)
 
 These should be running, but if not then that will start the services.
 
