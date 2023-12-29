@@ -39,14 +39,14 @@ Change the port number in yml file for apache2 container if needed. I had someth
 
 To run the docker-compose.yml file within ossec_project /dir use command: docker compose up -d --build
 
+The ossec service should be running in each container. If the service is not running then start the service by following the steps below.
+
 Once the containers are created and running, connect to the containers using command: docker exec -it "containername" /bin/bash
 
 Inside the containers run:
 
 For "apache2" container, CMD: sh /var/www/html/ossec-webui/setup.sh & go through the configuration (Review web-ui-installation_steps to complete this.)
 For "ossec-server", CMD: /var/ossec/bin/ossec-control start (Review installation_steps to complete this.)
-
-These should be running. But, if the service is not running then those commands shouldl start the service in each container.
 
 
 # Reference LINKS!
