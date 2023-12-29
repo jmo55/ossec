@@ -6,24 +6,22 @@
 
 su
 
-apt-get update && \
-    apt-get install -y software-properties-common && \
-    add-apt-repository ppa:ondrej/php
-
 apt update && apt upgrade -y
 
-#Prerequisite Commands;
-	
-apt install zlib1g-dev libssl-dev libpcre2-dev build-essential libsystemd-dev git unzip postfix gcc make apache2 libapache2-mod-php7.4 php7.4 php7.4-cli php7.4-common apache2-utils unzip wget inotify-tools -y
+#APT Automated Installation on Ubuntu
 
+ wget -q -O - https://updates.atomicorp.com/installers/atomic | sudo bash
 
-#start/enable web service
+                        # Update apt data
+                        sudo apt-get update
 
-systemctl start apache2
+                        # Server
+                        sudo apt-get install ossec-hids-server
 
-systemctl enable apache2
+                        # Agent
+                        sudo apt-get install ossec-hids-agent
 
-#INSTALL OSSEC
+#Manual Installation of OSSEC
 
 wget https://github.com/ossec/ossec-hids/archive/3.7.0.tar.gz
 
@@ -40,3 +38,19 @@ cd ossec-hids-3.7.0
 /var/ossec/bin/ossec-control start
 
 #Review "Additional_configurations" to continue with basic configuration steps after install.
+
+#Only follow these steps if you are going to add web-ui as well. NOTE: These same steps are in the "web-ui-installation_steps".
+
+apt-get update && \
+    apt-get install -y software-properties-common && \
+    add-apt-repository ppa:ondrej/php
+
+#Prerequisite Commands;
+	
+apt install zlib1g-dev libssl-dev libpcre2-dev build-essential libsystemd-dev git unzip postfix gcc make apache2 libapache2-mod-php7.4 php7.4 php7.4-cli php7.4-common apache2-utils unzip wget inotify-tools -y
+
+#start/enable web service
+
+systemctl start apache2
+
+systemctl enable apache2
