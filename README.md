@@ -1,66 +1,96 @@
-# OSSEC-SETUP-GUIDE Warning: web-ui did not work for me with PHP 8.x 
-
-# Getting Started
-
-I compiled this setup as a quick project, using multiple guides as resources. These steps are for OSSEC version 3.7.0. & Ubuntu/Debian system.
-RELEASE NOTES: https://github.com/ossec/ossec-hids/releases/tag/3.7.0
- 
-
-For baremetal or vm installation steps review "installation_steps". For initial configuration steps after installing OSSEC follow "Additional_configurations".
-
-To install the ossec web-ui, follow the steps in "web-ui-installation_steps" or follow the link below for another example from rapid7.
-(NOTE: In my docker compose file, the container automatically installs the latest version of PHP8.* which breaks the web-ui & I haven't found the fix.) 
-
-https://www.rapid7.com/blog/post/2017/06/30/how-to-install-and-configure-ossec-on-ubuntu-linux/
-
-To manage Agents run: /var/ossec/bin/manage_agents
-
-For Windows Agent Install:
-
-Next up, download the executable named Agent Windows from https://ossec.github.io/downloads.html. Run through the install wizard with all defaults. It should launch the Ossec Agent Manager when it’s done. 
-LINK: (https://updates.atomicorp.com/channels/atomic/windows/ossec-agent-win32-3.7.0-24343.exe)
+# OSSEC v3.8
 
 
-# Docker Compose 
 
-I compiled a docker-compose.yml file to containerize the configurations. This is not an image, I used the "ubuntu:ubuntu" & "atomicorp:ossec-docker" images.
+## System Requirements
 
-Directory Structure:
+- Newly deployed Ubuntu server (Latest Version)
+- Static IP assigned to server
+- Hostname assigned to server
+## Dependencies 
 
-/your_project (main dir)|docker-compose.yml
-/services (sub dir)
-/apache2 (services sub dir) | Dockerfile | httpd.conf
-/ossec-server (services sub dir) | Dockerfile | ossec.conf
-/agents (services sub dir)
-/agent1 (agents sub dir) | ossec.conf
-/agent2 (agents sub dir) | ossec.conf
+Update your system with the latest stable version. You can do this with the following command/s:
+```cmd
+sudo apt-get update -y
+```
 
-Change the port number in yml file for apache2 container if needed. I had something else exposed to port 80 and used port 8080.
+```cmd
+sudo apt-get upgrade -y
+```
 
-To run the docker-compose.yml file within ossec_project /dir use command: docker compose up -d --build
+For APT **Automated** Installation on Debian:
+```cmd
+wget -q -O - https://updates.atomicorp.com/installers/atomic | sudo bash
+```
 
-The ossec service should be running in each container. If the service is not running then start the service by following the steps below.
+Then, update repo again:
+```cmd
+sudo apt-get update
+```
 
-Once the containers are created and running, connect to the containers using command: docker exec -it "containername" /bin/bash
+For **Manual** Installation on Debian:
 
-Inside the containers run:
+OSSEC requires gcc, libc, and other libraries. I am using postgresql and libpq-dev provides the library and headers for it. You can install all these packages with the following command/s:
+```cmd
+apt-get install build-essential gcc make libpcre2-dev zlib1g-dev libssl-dev libsystemd-dev libpq-dev
+```
 
-For "apache2" container, CMD: sh /var/www/html/ossec-webui/setup.sh & go through the configuration (Review web-ui-installation_steps to complete this.)
-For "ossec-server", CMD: /var/ossec/bin/ossec-control start (Review installation_steps to complete this.)
+## Install OSSEC 
+
+**Automated**:
+- ***Server***
+```cmd
+sudo apt-get install ossec-hids-server
+```
+- ***Agent***
+```cmd
+sudo apt-get install ossec-hids-agent
+```
+
+**Manual**:
+First, download the latest version of the OSSEC from GitHub repository with the following commands:
+```cmd
+wget https://github.com/ossec/ossec-hids/archive/3.8.0.tar.gz
+tar -xvzf 3.8.0.tar.gz
+cd ossec-hids-3.8.0
+```
+
+Set an environment variable for DB to output (Only if you are going to output logs to a data base):
+```cmd
+export DATABASE=pgsql  # or export DATABASE=mysql
+```
+
+If OSSEC had been previously compiled without database support, the files created during the previous build should be removed from the src directory.
+```cmd
+cd src
+make clean
+cd ..
+```
+
+Once the old files have been removed, the installation can be performed:
+
+```cmd
+DATABASE=pgsql ./install.sh  # or DATABASE=mysql ./install.sh
+```
+
+***If you are going to enable database output in the configuration
+After installation is complete, database support needs to be enabled***:
+```cmd
+/var/ossec/bin/ossec-control enable database
+```
+
+Or, to simple start ossec service:
+```cmd
+/var/ossec/bin/ossec-control start
+```
 
 
-# Reference LINKS!
+## Resources:
 
-https://www.rapid7.com/blog/post/2017/06/30/how-to-install-and-configure-ossec-on-ubuntu-linux/
-
-https://www.youtube.com/watch?v=bcbJWWci1M4
-
-https://ossec-docs.readthedocs.io/en/latest/docs/manual/installation/installation-windows.html#step-4-the-windows-side
-
-https://www.ossec.net/docs/docs/manual/agent/agent-management.html
-
-https://github.com/ossec
-
-https://github.com/ossec/ossec-hids/blob/master/INSTALL
-
-https://github.com/ossec/ossec-wui/blob/master/README
+- [https://www.rapid7.com/blog/post/2017/06/30/how-to-install-and-configure-ossec-on-ubuntu-linux/](https://www.rapid7.com/blog/post/2017/06/30/how-to-install-and-configure-ossec-on-ubuntu-linux/)
+- [https://www.youtube.com/watch?v=bcbJWWci1M4](https://www.youtube.com/watch?v=bcbJWWci1M4)
+- [https://ossec-docs.readthedocs.io/en/latest/docs/manual/installation/installation-windows.html#step-4-the-windows-side](https://ossec-docs.readthedocs.io/en/latest/docs/manual/installation/installation-windows.html#step-4-the-windows-side)
+- [https://www.ossec.net/docs/docs/manual/agent/agent-management.html](https://www.ossec.net/docs/docs/manual/agent/agent-management.html)
+- [https://github.com/ossec](https://github.com/ossec)
+- [https://github.com/ossec/ossec-hids/blob/master/INSTALL](https://github.com/ossec/ossec-hids/blob/master/INSTALL)
+- [https://github.com/ossec/ossec-wui/blob/master/README](https://github.com/ossec/ossec-wui/blob/master/README)
