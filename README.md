@@ -23,12 +23,12 @@ For APT **Automated** Installation on Ubuntu:
 wget -q -O - https://updates.atomicorp.com/installers/atomic | sudo bash
 ```
 
-Then, update repo again:
+Then, update the repo again:
 ```cmd
 sudo apt-get update
 ```
 
-For **Manual** Installation on Debian:
+For **Manual** Installation on Ubuntu:
 
 OSSEC requires gcc, libc, and other libraries. I used postgresql and libpq-dev provides the library and headers for it. You can install all these packages with the following command/s:
 ```cmd
