@@ -18,7 +18,7 @@ sudo apt-get update -y
 sudo apt-get upgrade -y
 ```
 
-For APT **Automated** Installation on Debian:
+For APT **Automated** Installation on Ubuntu:
 ```cmd
 wget -q -O - https://updates.atomicorp.com/installers/atomic | sudo bash
 ```
@@ -30,7 +30,7 @@ sudo apt-get update
 
 For **Manual** Installation on Debian:
 
-OSSEC requires gcc, libc, and other libraries. I am using postgresql and libpq-dev provides the library and headers for it. You can install all these packages with the following command/s:
+OSSEC requires gcc, libc, and other libraries. I used postgresql and libpq-dev provides the library and headers for it. You can install all these packages with the following command/s:
 ```cmd
 apt-get install build-essential gcc make libpcre2-dev zlib1g-dev libssl-dev libsystemd-dev libpq-dev
 ```
