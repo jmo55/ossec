@@ -79,7 +79,7 @@ After installation is complete, database support needs to be enabled***:
 /var/ossec/bin/ossec-control enable database
 ```
 
-Or, to simple start ossec service:
+To simply start ossec service:
 ```cmd
 /var/ossec/bin/ossec-control start
 ```
