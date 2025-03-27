@@ -73,7 +73,7 @@ Once the old files have been removed, the installation can be performed:
 DATABASE=pgsql ./install.sh  # or DATABASE=mysql ./install.sh
 ```
 
-***If you are going to enable database output in the configuration
+***If you are going to enable database output in the configuration.
 After installation is complete, database support needs to be enabled***:
 ```cmd
 /var/ossec/bin/ossec-control enable database
